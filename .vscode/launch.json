@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ActivitySelection_Greedy",
+            "request": "launch",
+            "mainClass": "ActivitySelection_Greedy",
+            "projectName": "DAA-PRACTICAL-Practice_dc4c2b9e"
+        },
+        {
+            "type": "java",
             "name": "FractionalKnapsack",
             "request": "launch",
             "mainClass": "FractionalKnapsack",
