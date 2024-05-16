@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FloydWarshall",
+            "request": "launch",
+            "mainClass": "FloydWarshall",
+            "projectName": "DAA-PRACTICAL-Practice_dc4c2b9e"
+        },
+        {
+            "type": "java",
+            "name": "MatrixChainMultiplication",
+            "request": "launch",
+            "mainClass": "MatrixChainMultiplication",
+            "projectName": "DAA-PRACTICAL-Practice_dc4c2b9e"
+        },
+        {
+            "type": "java",
+            "name": "CoinChangeDp",
+            "request": "launch",
+            "mainClass": "CoinChangeDp",
+            "projectName": "DAA-PRACTICAL-Practice_dc4c2b9e"
+        },
+        {
+            "type": "java",
+            "name": "Prims",
+            "request": "launch",
+            "mainClass": "Prims",
+            "projectName": "DAA-PRACTICAL-Practice_dc4c2b9e"
+        },
+        {
+            "type": "java",
             "name": "ActivitySelection_Greedy",
             "request": "launch",
             "mainClass": "ActivitySelection_Greedy",
