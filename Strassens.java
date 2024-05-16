@@ -1,94 +1,118 @@
+//USED THE TECHNIQUE TAUGHT BY ABDUL BARI
+
 import java.util.Scanner;
 
 public class Strassens {
     static int [][] split(int A[][],int i,int j){
         int C[][]=new int[2][2];
-        int I=i;
-        int J=j;
-        int c;
-        for(int r=0;i<I+2;i++,r++){
-            for(c=0,j=J;j<J+2;j++,c++){
-                C[r][c]=A[i][j];
+        int r=0;
+        int c=0;
+        int I;
+        int J;
+        for(I=i;I<i+2;I++,r++){
+            for(J=j,c=0;J<j+2;J++,c++){
+                C[r][c]=A[I][J];
             }
         }
         return C;
     }
-    static int [][] Sum(int A[][],int B[][],int n){
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                A[i][j]=A[i][j]+B[i][j];
-            }
-        }
-        return A;
-    }
-    private static int[][] Multiply(int[][] a, int[][] b, int size) {
-        int K[][]=new int[4][4];
-        if(size==2){
-            int J[][]=new int[2][2];
-            J[0][0]=a[0][0]*b[0][0]+a[0][1]*b[1][0];
-            J[0][1]=a[0][0]*b[0][1]+a[0][1]*b[1][1];
-            J[1][0]=a[1][0]*b[0][0]+a[1][1]*b[1][0];
-            J[1][1]=a[1][0]*b[0][1]+a[1][1]*b[1][1];
-            return J;
-        }else{
-            int A[][]=split(a, 0, 0);
-            int B[][]=split(a, 0, 2);
-            int C[][]=split(a, 2, 0);
-            int D[][]=split(a, 2, 2);
-            int W[][]=split(b, 0, 0);
-            int X[][]=split(b, 0, 2);
-            int Y[][]=split(b, 2, 0);
-            int Z[][]=split(b, 2, 2);
-            A=Sum(Multiply(A, W, 2), Multiply(B, Y, 2), 2);
-            B=Sum(Multiply(A, X, 2), Multiply(B, Z, 2), 2);
-            C=Sum(Multiply(C, W, 2), Multiply(D, Y, 2), 2);
-            D=Sum(Multiply(C, X, 2), Multiply(D, Z, 2), 2);
-            for(int i=0;i<4;i++){
-                for(int j=0;j<4;j++){
-                    System.out.print(K[i][j]);
-                }
-                System.out.println("");
-            }
-            Combine(K,A,0,0);
-            Combine(K,B,0,2);
-            Combine(K,C,2,0);
-            Combine(K,D,2,2);
-        }
-        return K;
-    } 
-    static void Combine(int[][] k, int[][] a, int i, int j) {
-        
+    public static void combine(int A[][],int B[][],int i,int j){
+        int r=0;
         int c;
-        int I=i;
-        int J=j;
-        for(int r=0;i<I+2;i++,r++){
-            for(c=0,j=J;j<J+2;j++,c++){
-                k[i][j]=a[r][c];
+        int J;
+        for(int I=i;I<i+2;I++,r++){
+            for(J=j,c=0;J<j+2;J++,c++){
+                // System.out.println(r+" "+c+" "+I+""+J);
+                A[I][J]=B[r][c];
+                
             }
         }
     }
+    public static int[][] subMatrices(int[][] A,int[][] B){
+        int C[][]=new int[2][2];
+        for(int i=0;i<2;i++){    
+            for(int j=0;j<2;j++){    
+                C[i][j]=A[i][j]-B[i][j];          
+                }        
+            }
+        return C;    
+    }
+    public static int[][] addMatrices(int[][] A,int[][] B){
+        int C[][]=new int[2][2];
+        for(int i=0;i<2;i++){    
+            for(int j=0;j<2;j++){    
+                C[i][j]=A[i][j]+B[i][j];          
+                }        
+            }
+        return C;    
+    }
+    
+    public static int[][] multiplyMatrices(int[][] firstMatrix, int[][] secondMatrix) {
+        int[][] product = new int[2][2];
+        for(int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 2; k++) {
+                    product[i][j] += firstMatrix[i][k] * secondMatrix[k][j];
+                }
+            }
+        }
+
+        return product;
+    }
+    
     public static void main(String[] args) {
+        int X[][]=new int[4][4];
+        int Y[][]=new int[4][4];
         Scanner sc=new Scanner(System.in);
-        int A[][]=new int[4][4];
-        int B[][]=new int[4][4];
-        System.out.println("Enter the elements of matrix A");
+        System.out.println("Enter the first 4x4 matrix");
         for(int i=0;i<4;i++){
             for(int j=0;j<4;j++){
-                A[i][j]=sc.nextInt();
+                X[i][j]=sc.nextInt();
             }
         }
-        System.out.println("Enter the elements of matrix B");
+        System.out.println("Enter the second 4x4 matrix");
         for(int i=0;i<4;i++){
             for(int j=0;j<4;j++){
-                B[i][j]=sc.nextInt();
+                Y[i][j]=sc.nextInt();
             }
         }
-        int K[][]=Multiply(A,B,4);
+        int A[][]=split(X,0,0);
+        int B[][]=split(X,0,2);
+        int C[][]=split(X,2,0);
+        int D[][]=split(X, 2, 2);
+        int E[][]=split(Y,0,0);
+        int F[][]=split(Y,0,2);
+        int G[][]=split(Y,2,0);
+        int H[][]=split(Y, 2, 2);
+        int M1[][]=multiplyMatrices(addMatrices(A, C),addMatrices(E, F));
+        int M2[][]=multiplyMatrices(addMatrices(B, D),addMatrices(G, H));
+        int M3[][]=multiplyMatrices(subMatrices(A, D),addMatrices(E, H) );
+        int M4[][]=multiplyMatrices(A, subMatrices(F,H));
+        int M5[][]=multiplyMatrices(addMatrices(C, D), E);
+        int M6[][]=multiplyMatrices(addMatrices(A, B), H);
+        int M7[][]=multiplyMatrices(D, subMatrices(G, E));
+        int I[][]=subMatrices(addMatrices(M2, M3), addMatrices(M6, M7));
+        int J[][]=addMatrices(M4,M6);
+        int K[][]=addMatrices(M5,M7);
+        int L[][]=subMatrices(subMatrices(M1, M3), addMatrices(M4, M5));
+        combine(X, I, 0, 0);
+        combine(X, J, 0, 2);
+        combine(X, K, 2, 0);
+        combine(X, L, 2, 2);
         for(int i=0;i<4;i++){
             for(int j=0;j<4;j++){
-                System.out.print(K[i][j]);
+                System.out.print(X[i][j]+"\t");
             }
-            System.out.println("");
+            System.out.println();
         }
-    }   
+
+        
+
+        // for(int i=0;i<2;i++){
+        //     for(int j=0;j<2;j++){
+        //         System.out.print(M1[i][j]+"\t");
+        //     }
+        //     System.out.println();
+        // }
+    }
 }
